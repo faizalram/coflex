@@ -1,0 +1,390 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --background: 250 250 250;
+    --foreground: 23 23 23;
+    --card: 255 255 255;
+    --card-foreground: 23 23 23;
+    --border: 229 229 229;
+    --muted: 245 245 245;
+    --muted-foreground: 115 115 115;
+  }
+
+  .dark {
+    /* Core Base - Deep matte blacks */
+    --background: 13 13 13; /* #0D0D0D */
+    --foreground: 230 230 230; /* #E6E6E6 */
+    --card: 26 26 26; /* #1A1A1A */
+    --card-foreground: 230 230 230; /* #E6E6E6 */
+    --border: 44 44 44; /* #2C2C2C */
+    --muted: 35 35 35; /* #232323 */
+    --muted-foreground: 166 166 166; /* #A6A6A6 */
+    
+    /* Elevated surfaces */
+    --surface-elevated: 35 35 35; /* #232323 */
+    
+    /* Highlight */
+    --highlight: 46 58 78; /* #2E3A4E */
+  }
+  
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dark body {
+    background-color: #0D0D0D;
+    color: #E6E6E6;
+  }
+  
+  /* Ensure text visibility in dark mode */
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #E6E6E6;
+  }
+  
+  .dark p, .dark span, .dark div {
+    color: inherit;
+  }
+  
+  /* Override neutral text colors for dark mode */
+  .dark .text-neutral-900 {
+    color: #E6E6E6 !important;
+  }
+  
+  .dark .text-neutral-800 {
+    color: #E6E6E6 !important;
+  }
+  
+  .dark .text-neutral-700 {
+    color: #E6E6E6 !important;
+  }
+  
+  .dark .text-neutral-600 {
+    color: #A6A6A6 !important;
+  }
+  
+  .dark .text-neutral-500 {
+    color: #A6A6A6 !important;
+  }
+  
+  .dark .text-neutral-400 {
+    color: #A6A6A6 !important;
+  }
+  
+  .dark .text-neutral-300 {
+    color: #5C5C5C !important;
+  }
+  
+  .dark .text-neutral-200 {
+    color: #5C5C5C !important;
+  }
+  
+  .dark .text-neutral-100 {
+    color: #E6E6E6 !important;
+  }
+  
+  .dark .text-neutral-50 {
+    color: #E6E6E6 !important;
+  }
+  
+  /* Override neutral background colors for dark mode */
+  .dark .bg-neutral-950 {
+    background-color: #0D0D0D !important;
+  }
+  
+  .dark .bg-neutral-900 {
+    background-color: #1A1A1A !important;
+  }
+  
+  .dark .bg-neutral-800 {
+    background-color: #232323 !important;
+  }
+  
+  .dark .bg-neutral-700 {
+    background-color: #2C2C2C !important;
+  }
+  
+  .dark .bg-neutral-100 {
+    background-color: #232323 !important;
+  }
+  
+  .dark .bg-neutral-50 {
+    background-color: #1A1A1A !important;
+  }
+  
+  /* Override white backgrounds for dark mode */
+  .dark .bg-white {
+    background-color: #1A1A1A !important;
+  }
+  
+  /* Override light neutral backgrounds for dark mode */
+  .dark .bg-neutral-200 {
+    background-color: #2C2C2C !important;
+  }
+  
+  /* Override neutral border colors for dark mode */
+  .dark .border-neutral-800 {
+    border-color: #2C2C2C !important;
+  }
+  
+  .dark .border-neutral-700 {
+    border-color: #2C2C2C !important;
+  }
+  
+  .dark .border-neutral-600 {
+    border-color: #333333 !important;
+  }
+  
+  .dark .border-neutral-200 {
+    border-color: #2C2C2C !important;
+  }
+  
+  /* Override primary colors for better visibility in dark mode */
+  .dark .text-primary-700 {
+    color: #60a5fa !important;
+  }
+  
+  .dark .text-primary-600 {
+    color: #60a5fa !important;
+  }
+  
+  .dark .text-primary-400 {
+    color: #60a5fa !important;
+  }
+  
+  .dark .bg-primary-50 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+  }
+  
+  .dark .bg-primary-100 {
+    background-color: rgba(59, 130, 246, 0.15) !important;
+  }
+  
+  .dark .bg-primary-900 {
+    background-color: rgba(59, 130, 246, 0.2) !important;
+  }
+  
+  .dark .bg-primary-950 {
+    background-color: rgba(59, 130, 246, 0.15) !important;
+  }
+  
+  /* Override primary-200 border for dark mode */
+  .dark .border-primary-200 {
+    border-color: rgba(59, 130, 246, 0.3) !important;
+  }
+  
+  /* Override green/red/orange backgrounds for dark mode */
+  .dark .bg-green-50 {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+  }
+  
+  .dark .bg-orange-50 {
+    background-color: rgba(245, 158, 11, 0.1) !important;
+  }
+  
+  .dark .bg-red-50 {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+  }
+  
+  /* Semantic color classes for dark mode */
+  .dark .text-muted-foreground {
+    color: #A6A6A6 !important;
+  }
+  
+  .dark .text-foreground {
+    color: #E6E6E6 !important;
+  }
+  
+  .dark .bg-muted {
+    background-color: #232323 !important;
+  }
+  
+  .dark .bg-background {
+    background-color: #0D0D0D !important;
+  }
+  
+  .dark .bg-card {
+    background-color: #1A1A1A !important;
+  }
+  
+  .dark .border-muted {
+    border-color: #2C2C2C !important;
+  }
+  
+  /* Override hover states for dark mode */
+  .dark .hover\:bg-neutral-50:hover {
+    background-color: #232323 !important;
+  }
+  
+  .dark .hover\:bg-neutral-100:hover {
+    background-color: #232323 !important;
+  }
+  
+  .dark .hover\:bg-neutral-200:hover {
+    background-color: #2C2C2C !important;
+  }
+  
+  .dark .hover\:bg-white:hover {
+    background-color: #232323 !important;
+  }
+  
+  .dark .hover\:text-neutral-900:hover {
+    color: #E6E6E6 !important;
+  }
+  
+  .dark .hover\:text-neutral-100:hover {
+    color: #E6E6E6 !important;
+  }
+  
+  .dark .hover\:border-neutral-400:hover {
+    border-color: #333333 !important;
+  }
+  
+  .dark .hover\:border-neutral-600:hover {
+    border-color: #404040 !important;
+  }
+  
+  /* Override primary text colors in dark mode */
+  .dark .text-primary-900 {
+    color: #60a5fa !important;
+  }
+  
+  .dark .text-primary-800 {
+    color: #60a5fa !important;
+  }
+  
+  /* Custom scrollbar for dark mode */
+  .dark ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .dark ::-webkit-scrollbar-track {
+    background: #1A1A1A;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 6px;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    
+    :root {
+      --transition-duration: 0.01ms;
+    }
+  }
+
+  /* Set default transition duration */
+  :root {
+    --transition-duration: 300ms;
+  }
+
+  /* Focus visible styles for better accessibility - Light Mode */
+  *:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  /* Focus visible styles for better accessibility - Dark Mode */
+  .dark *:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+  }
+
+  /* Enhanced focus for interactive elements */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible,
+  [role="link"]:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  .dark button:focus-visible,
+  .dark a:focus-visible,
+  .dark input:focus-visible,
+  .dark select:focus-visible,
+  .dark textarea:focus-visible,
+  .dark [role="button"]:focus-visible,
+  .dark [role="link"]:focus-visible,
+  .dark [tabindex]:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 200ms ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 300ms ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 200ms ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
