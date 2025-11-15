@@ -2,7 +2,6 @@ import { useRole } from '@/hooks/useRole';
 import { RoleSwitcher } from '@/components/shared/RoleSwitcher';
 import { ThemeToggle } from '@/components/shared/ThemeToggle';
 import { User } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 
 export function Header() {
   const { currentRole } = useRole();
@@ -11,11 +10,8 @@ export function Header() {
     <header className="h-16 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
         <h1 className="text-xl font-bold text-primary-700 dark:text-primary-400">
-          AI Interest Rate Optimizer
+          CoFlex
         </h1>
-        <Badge variant="outline" className="text-xs">
-          MVP Demo
-        </Badge>
       </div>
 
       <div className="flex items-center gap-6">

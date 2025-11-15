@@ -43,26 +43,26 @@ export function ChurnHeatmap({ segments }: ChurnHeatmapProps) {
       const data = payload[0].payload;
       return (
         <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-3 shadow-lg">
-          <div className="font-medium text-neutral-900 dark:text-neutral-100">{data.name}</div>
-          <div className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+          <div className="font-medium text-gray-900 dark:text-gray-100">{data.name}</div>
+          <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
             Balance Tier: {data.balanceTier}
           </div>
           <div className="mt-2 space-y-1">
             <div className="flex items-center justify-between gap-4">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Churn Risk:</span>
+              <span className="text-sm text-gray-600 dark:text-gray-300">Churn Risk:</span>
               <span className="font-bold text-red-600 dark:text-red-400">
                 {formatPercentage(data.churnRisk, 0)}
               </span>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Retention Rate:</span>
+              <span className="text-sm text-gray-600 dark:text-gray-300">Retention Rate:</span>
               <span className="font-bold text-green-600 dark:text-green-400">
                 {formatPercentage(data.retentionRate, 0)}
               </span>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <span className="text-sm text-neutral-600 dark:text-neutral-400">Customers:</span>
-              <span className="font-medium text-neutral-900 dark:text-neutral-100">
+              <span className="text-sm text-gray-600 dark:text-gray-300">Customers:</span>
+              <span className="font-medium text-gray-900 dark:text-gray-100">
                 {data.customerCount.toLocaleString('id-ID')}
               </span>
             </div>

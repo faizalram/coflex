@@ -1,4 +1,4 @@
-# AI Interest Rate Optimizer
+# CoFlex
 
 A modern web dashboard MVP for demonstrating AI-powered interest rate optimization for banking divisions (TBW and RDPS).
 

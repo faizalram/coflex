@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document outlines the accessibility features implemented for dark mode in the AI Interest Rate Optimizer application, ensuring WCAG 2.1 Level AA compliance.
+This document outlines the accessibility features implemented for dark mode in the CoFlex application, ensuring WCAG 2.1 Level AA compliance.
 
 ## Implemented Features
 

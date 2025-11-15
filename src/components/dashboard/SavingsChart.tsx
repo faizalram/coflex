@@ -30,7 +30,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: entry.color }}
             />
-            <span className="text-gray-600 dark:text-gray-400">{entry.name}:</span>
+            <span className="text-gray-600 dark:text-gray-300">{entry.name}:</span>
             <span className="font-semibold text-gray-900 dark:text-gray-100">
               {formatCurrency(entry.value, true)}
             </span>

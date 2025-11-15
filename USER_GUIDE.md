@@ -32,7 +32,7 @@
 
 ## Introduction
 
-The AI Interest Rate Optimizer is a powerful web application designed to help banking professionals optimize interest rates for both wholesale (TBW) and retail (RDPS) customers. Using machine learning algorithms, the application provides data-driven recommendations to maximize cost savings while minimizing customer churn risk.
+CoFlex is a powerful web application designed to help banking professionals optimize interest rates for both wholesale (TBW) and retail (RDPS) customers. Using machine learning algorithms, the application provides data-driven recommendations to maximize cost savings while minimizing customer churn risk.
 
 **Key Features:**
 - Real-time interest rate recommendations
@@ -525,4 +525,4 @@ For technical issues, questions, or feedback:
 
 **Version**: 1.0.0  
 **Last Updated**: 2025  
-**Application**: AI Interest Rate Optimizer
+**Application**: CoFlex

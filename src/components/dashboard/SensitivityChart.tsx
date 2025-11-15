@@ -56,8 +56,8 @@ const CustomTooltip = ({ active, payload }: any) => {
     return (
       <div className="bg-white dark:bg-neutral-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-neutral-700">
         <p className="font-semibold text-gray-900 dark:text-gray-100">{data.sensitivity} Sensitivity</p>
-        <p className="text-sm text-gray-600 dark:text-gray-400">Jumlah: {data.count} nasabah</p>
-        <p className="text-sm text-gray-600 dark:text-gray-400">Persentase: {data.percentage}%</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">Jumlah: {data.count} nasabah</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300">Persentase: {data.percentage}%</p>
       </div>
     );
   }
