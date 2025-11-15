@@ -102,10 +102,10 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
         </div>
 
         {/* Recommended Rate */}
-        <div className="rounded-lg border-2 border-primary-200 bg-primary-50 p-4">
+        <div className="rounded-lg border-2 border-primary-200 dark:border-primary-900 bg-primary-50 dark:bg-primary-950/30 p-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-primary-900">
+              <div className="text-sm font-medium text-primary-900 dark:text-primary-100">
                 Recommended Interest Rate
               </div>
               {displayCustomer.isAnalyzed && (
@@ -201,7 +201,7 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
           </div>
           <div className="relative">
             {/* Progress bar background */}
-            <div className="h-8 w-full overflow-hidden rounded-lg bg-neutral-200">
+            <div className="h-8 w-full overflow-hidden rounded-lg bg-neutral-200 dark:bg-neutral-800">
               {/* Progress bar fill */}
               <div
                 className={`h-full transition-all duration-500 ${
@@ -216,7 +216,7 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
             </div>
             {/* Percentage label */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-bold text-neutral-900">
+              <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
                 {formatPercentage(displayCustomer.churnRisk, 0)}
               </span>
             </div>
@@ -230,14 +230,14 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
         </div>
 
         {/* Projected Savings */}
-        <div className={`rounded-lg p-4 ${isRateDecrease ? 'bg-green-50' : 'bg-orange-50'}`}>
-          <div className="text-sm font-medium text-neutral-700">
+        <div className={`rounded-lg p-4 ${isRateDecrease ? 'bg-green-50 dark:bg-green-950/30' : 'bg-orange-50 dark:bg-orange-950/30'}`}>
+          <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
             Projected Annual Savings
           </div>
-          <div className={`mt-1 text-2xl font-bold ${isRateDecrease ? 'text-emerald-700' : 'text-amber-600'}`}>
+          <div className={`mt-1 text-2xl font-bold ${isRateDecrease ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
             {isRateDecrease ? '+' : '-'}{formatCurrency(Math.abs(displayCustomer.projectedSavings), true)}
           </div>
-          <div className="mt-1 text-xs text-neutral-600">
+          <div className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
             Based on recommended rate adjustment
           </div>
         </div>
@@ -254,7 +254,7 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
           </div>
           <div className="relative">
             {/* Progress bar background */}
-            <div className="h-6 w-full overflow-hidden rounded-full bg-neutral-200">
+            <div className="h-6 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-800">
               {/* Progress bar fill */}
               <div
                 className={`h-full transition-all duration-500 ${
@@ -269,7 +269,7 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
             </div>
             {/* Percentage label */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xs font-bold text-neutral-900">
+              <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100">
                 {displayCustomer.confidenceScore}%
               </span>
             </div>
@@ -277,9 +277,9 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
         </div>
 
         {/* Sensitivity Badge */}
-        <div className="flex items-center justify-between rounded-lg border border-neutral-200 p-3">
+        <div className="flex items-center justify-between rounded-lg border border-neutral-200 dark:border-neutral-700 bg-transparent dark:bg-neutral-900/30 p-3">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-neutral-700">
+            <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Rate Sensitivity
             </span>
             <Tooltip>

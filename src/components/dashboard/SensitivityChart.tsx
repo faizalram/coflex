@@ -123,7 +123,7 @@ export function SensitivityChart({ data, loading = false }: SensitivityChartProp
               fill="#8884d8"
               dataKey="count"
               animationBegin={0}
-              animationDuration={500}
+              animationDuration={7000}
               animationEasing="ease-out"
             >
               {data.map((entry, index) => (

@@ -74,7 +74,7 @@ function MetricGaugeCard({ data, loading }: { data: MetricCardData; loading?: bo
                 strokeWidth="8"
                 strokeLinecap="round"
                 strokeDasharray={`${(fillPercentage / 100) * 157} 157`}
-                className="transition-all duration-1000 ease-out"
+                className="transition-all duration-[7000ms] ease-out"
               />
               {/* Needle */}
               <line
@@ -86,7 +86,7 @@ function MetricGaugeCard({ data, loading }: { data: MetricCardData; loading?: bo
                 strokeWidth="2"
                 strokeLinecap="round"
                 transform={`rotate(${rotation} 60 50)`}
-                className="transition-all duration-1000 ease-out"
+                className="transition-all duration-[7000ms] ease-out"
               />
               <circle cx="60" cy="50" r="4" fill={data.color} />
             </svg>
@@ -165,7 +165,7 @@ function PerformanceTrendChart({ data, loading }: { data: ModelPerformanceTrend[
               activeDot={{ r: 6 }}
               name="Accuracy"
               animationBegin={0}
-              animationDuration={500}
+              animationDuration={7000}
               animationEasing="ease-out"
             />
             <Line
@@ -176,8 +176,8 @@ function PerformanceTrendChart({ data, loading }: { data: ModelPerformanceTrend[
               dot={{ fill: '#10b981', r: 4 }}
               activeDot={{ r: 6 }}
               name="Precision"
-              animationBegin={100}
-              animationDuration={500}
+              animationBegin={1000}
+              animationDuration={7000}
               animationEasing="ease-out"
             />
             <Line
@@ -188,8 +188,8 @@ function PerformanceTrendChart({ data, loading }: { data: ModelPerformanceTrend[
               dot={{ fill: '#f59e0b', r: 4 }}
               activeDot={{ r: 6 }}
               name="Recall"
-              animationBegin={200}
-              animationDuration={500}
+              animationBegin={2000}
+              animationDuration={7000}
               animationEasing="ease-out"
             />
           </LineChart>

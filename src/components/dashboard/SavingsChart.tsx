@@ -122,7 +122,7 @@ export function SavingsChart({ data, loading = false }: SavingsChartProps) {
               fillOpacity={1}
               fill="url(#colorActual)"
               animationBegin={0}
-              animationDuration={500}
+              animationDuration={7000}
               animationEasing="ease-out"
             />
             <Area
@@ -133,8 +133,8 @@ export function SavingsChart({ data, loading = false }: SavingsChartProps) {
               strokeWidth={2}
               fillOpacity={1}
               fill="url(#colorProjected)"
-              animationBegin={100}
-              animationDuration={500}
+              animationBegin={500}
+              animationDuration={7000}
               animationEasing="ease-out"
             />
           </AreaChart>

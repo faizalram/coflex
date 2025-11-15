@@ -217,7 +217,7 @@ export function WholesaleCustomerList({
                 return (
                 <TableRow
                   key={customer.id}
-                  className={`cursor-pointer ${highPriority ? 'bg-orange-50/50' : ''}`}
+                  className={`cursor-pointer ${highPriority ? 'bg-orange-50/50 dark:bg-orange-950/30' : ''}`}
                   data-state={
                     selectedCustomerId === customer.id ? 'selected' : undefined
                   }

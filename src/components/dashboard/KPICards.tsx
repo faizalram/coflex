@@ -106,10 +106,10 @@ function KPICard({ data, loading }: { data: KPICardData; loading?: boolean }) {
 
 export function KPICards({ metrics, loading = false }: KPICardsProps) {
   // Animated counters for each metric
-  const animatedDPK = useAnimatedCounter(metrics.totalDPK, 1200, !loading);
-  const animatedSavings = useAnimatedCounter(metrics.projectedSavings, 1200, !loading);
-  const animatedCustomers = useAnimatedCounter(metrics.customerCount, 1000, !loading);
-  const animatedHighRisk = useAnimatedCounter(metrics.highRiskCount, 800, !loading);
+  const animatedDPK = useAnimatedCounter(metrics.totalDPK, 7000, !loading);
+  const animatedSavings = useAnimatedCounter(metrics.projectedSavings, 7000, !loading);
+  const animatedCustomers = useAnimatedCounter(metrics.customerCount, 7000, !loading);
+  const animatedHighRisk = useAnimatedCounter(metrics.highRiskCount, 7000, !loading);
 
   const kpiData: KPICardData[] = [
     {

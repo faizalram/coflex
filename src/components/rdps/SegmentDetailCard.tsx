@@ -268,7 +268,7 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
                     paddingAngle={2}
                     dataKey="value"
                     animationBegin={0}
-                    animationDuration={500}
+                    animationDuration={1500}
                     animationEasing="ease-out"
                   >
                     {retentionData.map((entry, index) => (
