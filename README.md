@@ -170,18 +170,27 @@ Comprehensive testing documentation is available:
 
 ## Deployment
 
-### Production Build
+### GitHub Pages (Automatic)
+
+This project is configured for automatic deployment to GitHub Pages:
+
+1. Push your changes to the `main` branch
+2. GitHub Actions will automatically build and deploy
+3. Your site will be live at: `https://faizalram.github.io/coflex/`
+
+The deployment workflow runs on every push to `main` and can also be triggered manually from the Actions tab.
+
+### Manual Production Build
 
 1. Ensure Node.js version meets requirements (20.19+ or 22.12+)
 2. Install dependencies: `npm install`
 3. Build the application: `npm run build`
 4. Deploy the `dist/` folder to your hosting service
 
-### Recommended Hosting
+### Alternative Hosting Options
 
 - **Vercel**: Zero-config deployment for Vite apps
 - **Netlify**: Simple drag-and-drop deployment
-- **GitHub Pages**: Free hosting for static sites
 - **AWS S3 + CloudFront**: Enterprise-grade hosting
 
 ### Pre-Deployment Checklist
