@@ -76,36 +76,48 @@ export class MockDataService implements IDataService {
     const rateDiff = customer.currentRate - customer.recommendedRate;
     
     if (rateDiff > 0.5) {
-      // Recommend rate decrease (lower rate = customer gets less money = higher churn risk, but bank saves money)
+      // Recommend rate decrease (lower rate = customer gets less money, but bank saves money)
       recommendations.push({
         id: `REC-${customerId}-001`,
         customerId,
         type: 'rate_decrease',
-        priority: customer.churnRisk > 30 ? 'High' : 'Medium',
+        priority: customer.sensitivity === 'High' ? 'High' : 'Medium',
         title: `Reduce interest rate to ${customer.recommendedRate}%`,
         description: `Lower the rate from ${customer.currentRate}% to ${customer.recommendedRate}% to optimize cost of funds`,
-        rationale: `Analysis shows this customer has ${customer.sensitivity.toLowerCase()} rate sensitivity with ${customer.churnRisk}% churn risk. Reducing the rate will save ${(customer.projectedSavings / 1_000_000_000).toFixed(2)}B IDR annually for the bank. However, the customer will earn less interest, which may increase churn risk by approximately ${Math.round(rateDiff * 2)}%.`,
+        rationale: `Analysis shows this customer has ${customer.sensitivity.toLowerCase()} rate sensitivity. Reducing the rate will save ${(customer.projectedSavings / 1_000_000_000).toFixed(2)}B IDR annually for the bank. The customer will earn less interest, so monitor their satisfaction closely.`,
         impact: {
           savingsAmount: customer.projectedSavings,
-          churnRiskChange: Math.round(rateDiff * 2), // Lower rate = higher churn risk (positive change)
         },
         confidence: customer.confidenceScore > 90 ? 'High' : customer.confidenceScore > 80 ? 'Medium' : 'Low',
+        mlVariables: customer.mlVariables || {
+          kopraTransaction: 0,
+          livinTransaction: 0,
+          tradeFinanceTransaction: 0,
+          livinMerchantTransaction: 0,
+          loanPortfolio: 0
+        },
       });
     } else if (rateDiff < -0.5) {
-      // Recommend rate increase (higher rate = customer gets more money = lower churn risk, but bank pays more)
+      // Recommend rate increase (higher rate = customer gets more money, but bank pays more)
       recommendations.push({
         id: `REC-${customerId}-001`,
         customerId,
         type: 'rate_increase',
-        priority: customer.churnRisk > 40 ? 'High' : 'Low',
+        priority: customer.sensitivity === 'High' ? 'High' : 'Low',
         title: `Increase interest rate to ${customer.recommendedRate}%`,
-        description: `Raise the rate from ${customer.currentRate}% to ${customer.recommendedRate}% to reduce churn risk`,
-        rationale: `Customer shows high churn risk (${customer.churnRisk}%) at current rate. Increasing to recommended rate will improve retention as the customer earns more interest. This will cost the bank approximately ${(Math.abs(customer.projectedSavings) / 1_000_000_000).toFixed(2)}B IDR annually but should reduce churn risk by approximately ${Math.round(Math.abs(rateDiff) * 3)}%.`,
+        description: `Raise the rate from ${customer.currentRate}% to ${customer.recommendedRate}% to improve customer satisfaction`,
+        rationale: `Customer has ${customer.sensitivity.toLowerCase()} rate sensitivity. Increasing to recommended rate will improve retention as the customer earns more interest. This will cost the bank approximately ${(Math.abs(customer.projectedSavings) / 1_000_000_000).toFixed(2)}B IDR annually but should improve customer satisfaction.`,
         impact: {
           savingsAmount: -customer.projectedSavings,
-          churnRiskChange: -Math.round(Math.abs(rateDiff) * 3), // Higher rate = lower churn risk (negative change)
         },
         confidence: customer.confidenceScore > 90 ? 'High' : customer.confidenceScore > 80 ? 'Medium' : 'Low',
+        mlVariables: customer.mlVariables || {
+          kopraTransaction: 0,
+          livinTransaction: 0,
+          tradeFinanceTransaction: 0,
+          livinMerchantTransaction: 0,
+          loanPortfolio: 0
+        },
       });
     } else {
       // Maintain current rate
@@ -116,30 +128,42 @@ export class MockDataService implements IDataService {
         priority: 'Low',
         title: `Maintain current rate at ${customer.currentRate}%`,
         description: 'Current rate is optimal for this customer',
-        rationale: `The current rate is well-aligned with customer expectations and market conditions. Churn risk is manageable at ${customer.churnRisk}%.`,
+        rationale: `The current rate is well-aligned with customer expectations and market conditions. Customer has ${customer.sensitivity.toLowerCase()} rate sensitivity.`,
         impact: {
           savingsAmount: 0,
-          churnRiskChange: 0,
         },
         confidence: customer.confidenceScore > 90 ? 'High' : customer.confidenceScore > 80 ? 'Medium' : 'Low',
+        mlVariables: customer.mlVariables || {
+          kopraTransaction: 0,
+          livinTransaction: 0,
+          tradeFinanceTransaction: 0,
+          livinMerchantTransaction: 0,
+          loanPortfolio: 0
+        },
       });
     }
     
-    // Add monitoring recommendation for high-risk customers
-    if (customer.churnRisk > 35) {
+    // Add monitoring recommendation for high-sensitivity customers
+    if (customer.sensitivity === 'High') {
       recommendations.push({
         id: `REC-${customerId}-002`,
         customerId,
         type: 'rate_maintain',
         priority: 'High',
         title: 'Monitor customer closely',
-        description: 'High churn risk detected - consider proactive engagement',
-        rationale: `This customer shows elevated churn risk (${customer.churnRisk}%). Recommend regular relationship manager touchpoints and consideration of non-rate retention strategies.`,
+        description: 'High rate sensitivity detected - consider proactive engagement',
+        rationale: `This customer shows high rate sensitivity. Recommend regular relationship manager touchpoints and consideration of non-rate retention strategies.`,
         impact: {
           savingsAmount: 0,
-          churnRiskChange: -10,
         },
         confidence: 'Medium',
+        mlVariables: customer.mlVariables || {
+          kopraTransaction: 0,
+          livinTransaction: 0,
+          tradeFinanceTransaction: 0,
+          livinMerchantTransaction: 0,
+          loanPortfolio: 0
+        },
       });
     }
     
@@ -150,38 +174,31 @@ export class MockDataService implements IDataService {
     await this.delay();
     
     // Find the customer or segment
-    let baseChurnRisk = 25;
     let baseSavings = 0;
     let baseRetention = 75;
     
     if (params.customerId) {
       const customer = mockWholesaleCustomers.find((c) => c.id === params.customerId);
       if (customer) {
-        baseChurnRisk = customer.churnRisk;
         baseSavings = customer.projectedSavings;
-        baseRetention = 100 - customer.churnRisk;
+        baseRetention = 85; // Default retention rate for customers
       }
     } else if (params.segmentId) {
       const segment = mockRetailSegments.find((s) => s.id === params.segmentId);
       if (segment) {
-        baseChurnRisk = segment.churnRisk;
         baseSavings = segment.projectedSavings;
         baseRetention = segment.retentionRate;
       }
     }
     
     // Calculate impact of rate adjustment
-    // Negative adjustment (rate decrease) = bank saves more money, but customer gets less = higher churn risk
-    // Positive adjustment (rate increase) = bank pays more money, but customer gets more = lower churn risk
+    // Negative adjustment (rate decrease) = bank saves more money, but customer satisfaction may decrease
+    // Positive adjustment (rate increase) = bank pays more money, but customer satisfaction increases
     const rateAdjustment = params.rateAdjustment;
     
-    // Negative rate adjustment (decrease) = churn risk increases (customer unhappy)
-    // Positive rate adjustment (increase) = churn risk decreases (customer happy)
-    const churnRiskChange = -rateAdjustment * 3; // 1% rate decrease = 3% churn risk increase
     const savingsChange = -rateAdjustment * 0.15; // 1% rate decrease = 15% more savings for bank
     const retentionChange = rateAdjustment * 2; // 1% rate increase = 2% retention increase
     
-    const projectedChurnRisk = Math.max(0, Math.min(100, baseChurnRisk + churnRiskChange));
     const projectedSavings = Math.max(0, baseSavings * (1 + savingsChange));
     const projectedRetention = Math.max(0, Math.min(100, baseRetention + retentionChange));
     
@@ -200,7 +217,6 @@ export class MockDataService implements IDataService {
       name: scenarioType.charAt(0).toUpperCase() + scenarioType.slice(1),
       type: scenarioType,
       rateAdjustment,
-      projectedChurnRisk,
       projectedSavings,
       projectedRetention,
     };
@@ -259,21 +275,9 @@ export class MockDataService implements IDataService {
     // Round to 2 decimal places
     analyzedCustomer.recommendedRate = Math.round(analyzedCustomer.recommendedRate * 100) / 100;
     
-    // Update churn risk based on new recommended rate
-    // Lower recommended rate = customer gets less money = higher churn risk
-    // Higher recommended rate = customer gets more money = lower churn risk
-    const rateDiff = analyzedCustomer.currentRate - analyzedCustomer.recommendedRate;
-    // If rateDiff is positive (current > recommended), we're lowering rate, so churn risk increases
-    // If rateDiff is negative (current < recommended), we're raising rate, so churn risk decreases
-    const churnRiskAdjustment = rateDiff * 2; // 1% rate diff = 2% churn risk change
-    analyzedCustomer.churnRisk = Math.max(
-      5,
-      Math.min(95, analyzedCustomer.churnRisk + churnRiskAdjustment)
-    );
-    analyzedCustomer.churnRisk = Math.round(analyzedCustomer.churnRisk);
-    
     // Update projected savings based on rate difference
     // Lower recommended rate = more savings for bank
+    const rateDiff = analyzedCustomer.currentRate - analyzedCustomer.recommendedRate;
     const savingsMultiplier = rateDiff * 0.15; // 1% rate diff = 15% savings change
     analyzedCustomer.projectedSavings = Math.max(
       0,
@@ -324,27 +328,8 @@ export class MockDataService implements IDataService {
     // Round to 2 decimal places
     analyzedSegment.recommendedRate = Math.round(analyzedSegment.recommendedRate * 100) / 100;
     
-    // Update churn risk based on new recommended rate
-    // Lower recommended rate = customers get less money = higher churn risk
-    // Higher recommended rate = customers get more money = lower churn risk
-    const rateDiff = analyzedSegment.currentRate - analyzedSegment.recommendedRate;
-    // If rateDiff is positive (current > recommended), we're lowering rate, so churn risk increases
-    // If rateDiff is negative (current < recommended), we're raising rate, so churn risk decreases
-    const churnRiskAdjustment = rateDiff * 2; // 1% rate diff = 2% churn risk change
-    analyzedSegment.churnRisk = Math.max(
-      5,
-      Math.min(95, analyzedSegment.churnRisk + churnRiskAdjustment)
-    );
-    analyzedSegment.churnRisk = Math.round(analyzedSegment.churnRisk);
-    
-    // Update retention rate (inverse of churn risk with some variance)
-    analyzedSegment.retentionRate = Math.max(
-      50,
-      Math.min(98, 100 - analyzedSegment.churnRisk + (Math.random() * 4 - 2))
-    );
-    analyzedSegment.retentionRate = Math.round(analyzedSegment.retentionRate);
-    
     // Update projected savings based on rate difference
+    const rateDiff = analyzedSegment.currentRate - analyzedSegment.recommendedRate;
     const savingsMultiplier = rateDiff * 0.15; // 1% rate diff = 15% savings change
     analyzedSegment.projectedSavings = Math.max(
       0,

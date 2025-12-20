@@ -26,6 +26,7 @@ import {
   Info,
   AlertTriangle,
 } from 'lucide-react';
+import { MLVariablesCard } from '@/components/shared/MLVariablesCard';
 
 interface RecommendationCardProps {
   recommendation: Recommendation;
@@ -87,8 +88,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
   const confidenceInfo = getConfidenceInfo(recommendation.confidence);
 
   // Check if this is a significant rate change (>1% change)
-  const isSignificantChange = Math.abs(recommendation.impact.churnRiskChange) > 10 || 
-                               Math.abs(recommendation.impact.savingsAmount) > 50_000_000_000;
+  const isSignificantChange = Math.abs(recommendation.impact.savingsAmount) > 50_000_000_000;
 
   return (
     <TooltipProvider>
@@ -125,7 +125,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Impact Metrics */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="rounded-lg bg-neutral-50 p-3">
               <div className="text-xs text-neutral-600">Savings Impact</div>
               <div
@@ -137,19 +137,6 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
               >
                 {recommendation.impact.savingsAmount >= 0 ? '+' : ''}
                 {formatCurrency(recommendation.impact.savingsAmount, true)}
-              </div>
-            </div>
-            <div className="rounded-lg bg-neutral-50 p-3">
-              <div className="text-xs text-neutral-600">Churn Risk Change</div>
-              <div
-                className={`mt-1 text-lg font-bold ${
-                  recommendation.impact.churnRiskChange <= 0
-                    ? 'text-emerald-700'
-                    : 'text-rose-600'
-                }`}
-              >
-                {recommendation.impact.churnRiskChange > 0 ? '+' : ''}
-                {recommendation.impact.churnRiskChange}%
               </div>
             </div>
           </div>
@@ -177,6 +164,14 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
               </p>
             </TooltipContent>
           </Tooltip>
+
+          {/* ML Model Variables */}
+          {recommendation.mlVariables && (
+            <MLVariablesCard 
+              variables={recommendation.mlVariables}
+              title="AI Model Analysis"
+            />
+          )}
 
           {/* View Details Button */}
           <Button
@@ -238,7 +233,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
               <h4 className="mb-3 text-sm font-semibold text-neutral-900">
                 Expected Impact
               </h4>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div className="rounded-lg border border-neutral-200 p-4">
                   <div className="text-xs font-medium text-neutral-600">
                     Annual Savings
@@ -257,26 +252,16 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
                     Cost of funds impact
                   </div>
                 </div>
-                <div className="rounded-lg border border-neutral-200 p-4">
-                  <div className="text-xs font-medium text-neutral-600">
-                    Churn Risk
-                  </div>
-                  <div
-                    className={`mt-2 text-2xl font-bold ${
-                      recommendation.impact.churnRiskChange <= 0
-                        ? 'text-emerald-700'
-                        : 'text-rose-600'
-                    }`}
-                  >
-                    {recommendation.impact.churnRiskChange > 0 ? '+' : ''}
-                    {recommendation.impact.churnRiskChange}%
-                  </div>
-                  <div className="mt-1 text-xs text-neutral-500">
-                    Expected change
-                  </div>
-                </div>
               </div>
             </div>
+
+            {/* ML Model Variables in Modal */}
+            {recommendation.mlVariables && (
+              <MLVariablesCard 
+                variables={recommendation.mlVariables}
+                title="Detailed AI Model Analysis"
+              />
+            )}
 
             {/* Action Buttons */}
             <div className="flex justify-end gap-2">

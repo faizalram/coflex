@@ -1,5 +1,53 @@
 import type { WholesaleCustomer } from '../types/customer';
 
+// Helper function to generate realistic ML variables based on customer segment and balance
+const generateMLVariables = (segment: string, balance: number) => {
+  const balanceMultiplier = balance / 1_000_000_000_000; // Convert to trillions for scaling
+  
+  switch (segment) {
+    case 'Corporate':
+      return {
+        kopraTransaction: Math.floor(15000 + (balanceMultiplier * 8000) + (Math.random() * 5000)),
+        livinTransaction: Math.floor(25000 + (balanceMultiplier * 12000) + (Math.random() * 8000)),
+        tradeFinanceTransaction: Math.floor(8000 + (balanceMultiplier * 4000) + (Math.random() * 3000)),
+        livinMerchantTransaction: Math.floor(12000 + (balanceMultiplier * 6000) + (Math.random() * 4000)),
+        loanPortfolio: Math.floor((balance * 0.3) + (Math.random() * balance * 0.2))
+      };
+    case 'Commercial':
+      return {
+        kopraTransaction: Math.floor(8000 + (balanceMultiplier * 4000) + (Math.random() * 3000)),
+        livinTransaction: Math.floor(15000 + (balanceMultiplier * 7000) + (Math.random() * 5000)),
+        tradeFinanceTransaction: Math.floor(4000 + (balanceMultiplier * 2000) + (Math.random() * 1500)),
+        livinMerchantTransaction: Math.floor(7000 + (balanceMultiplier * 3500) + (Math.random() * 2500)),
+        loanPortfolio: Math.floor((balance * 0.25) + (Math.random() * balance * 0.15))
+      };
+    case 'GVI':
+      return {
+        kopraTransaction: Math.floor(5000 + (balanceMultiplier * 2500) + (Math.random() * 2000)),
+        livinTransaction: Math.floor(8000 + (balanceMultiplier * 4000) + (Math.random() * 3000)),
+        tradeFinanceTransaction: Math.floor(2000 + (balanceMultiplier * 1000) + (Math.random() * 800)),
+        livinMerchantTransaction: Math.floor(4000 + (balanceMultiplier * 2000) + (Math.random() * 1500)),
+        loanPortfolio: Math.floor((balance * 0.4) + (Math.random() * balance * 0.2))
+      };
+    case 'SME':
+      return {
+        kopraTransaction: Math.floor(2000 + (balanceMultiplier * 1000) + (Math.random() * 800)),
+        livinTransaction: Math.floor(5000 + (balanceMultiplier * 2500) + (Math.random() * 2000)),
+        tradeFinanceTransaction: Math.floor(800 + (balanceMultiplier * 400) + (Math.random() * 300)),
+        livinMerchantTransaction: Math.floor(3000 + (balanceMultiplier * 1500) + (Math.random() * 1000)),
+        loanPortfolio: Math.floor((balance * 0.2) + (Math.random() * balance * 0.15))
+      };
+    default:
+      return {
+        kopraTransaction: 1000,
+        livinTransaction: 2000,
+        tradeFinanceTransaction: 500,
+        livinMerchantTransaction: 1500,
+        loanPortfolio: balance * 0.1
+      };
+  }
+};
+
 export const mockWholesaleCustomers: WholesaleCustomer[] = [
   // Corporate Segment
   {
@@ -10,10 +58,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.5,
     recommendedRate: 3.8,
     sensitivity: 'Low',
-    churnRisk: 12,
     confidenceScore: 94,
     projectedSavings: 40_250_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('Corporate', 5_750_000_000_000),
   },
   {
     id: 'WH002',
@@ -23,10 +71,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.2,
     recommendedRate: 3.5,
     sensitivity: 'Low',
-    churnRisk: 15,
     confidenceScore: 91,
     projectedSavings: 29_400_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('Corporate', 4_200_000_000_000),
   },
   {
     id: 'WH003',
@@ -36,10 +84,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.8,
     recommendedRate: 4.0,
     sensitivity: 'Medium',
-    churnRisk: 22,
     confidenceScore: 88,
     projectedSavings: 30_400_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('Corporate', 3_800_000_000_000),
   },
   {
     id: 'WH004',
@@ -49,10 +97,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 3.9,
     recommendedRate: 3.2,
     sensitivity: 'Low',
-    churnRisk: 8,
     confidenceScore: 96,
     projectedSavings: 59_500_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('Corporate', 8_500_000_000_000),
   },
   {
     id: 'WH005',
@@ -62,10 +110,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.3,
     recommendedRate: 3.7,
     sensitivity: 'Low',
-    churnRisk: 10,
     confidenceScore: 93,
     projectedSavings: 41_400_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('Corporate', 6_900_000_000_000),
   },
   // Commercial Segment
   {
@@ -76,10 +124,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 5.2,
     recommendedRate: 4.5,
     sensitivity: 'Medium',
-    churnRisk: 28,
     confidenceScore: 85,
     projectedSavings: 14_700_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('Commercial', 2_100_000_000_000),
   },
   {
     id: 'WH007',
@@ -89,10 +137,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 5.0,
     recommendedRate: 4.3,
     sensitivity: 'Medium',
-    churnRisk: 25,
     confidenceScore: 87,
     projectedSavings: 12_950_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('Commercial', 1_850_000_000_000),
   },
   {
     id: 'WH008',
@@ -102,10 +150,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.9,
     recommendedRate: 4.2,
     sensitivity: 'Low',
-    churnRisk: 18,
     confidenceScore: 90,
     projectedSavings: 11_200_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('Commercial', 1_600_000_000_000),
   },
   {
     id: 'WH009',
@@ -115,10 +163,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 5.3,
     recommendedRate: 4.6,
     sensitivity: 'High',
-    churnRisk: 35,
     confidenceScore: 82,
     projectedSavings: 13_650_000_000,
     lastUpdated: new Date('2025-11-06'),
+    mlVariables: generateMLVariables('Commercial', 1_950_000_000_000),
   },
   {
     id: 'WH010',
@@ -128,10 +176,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 5.1,
     recommendedRate: 4.4,
     sensitivity: 'Medium',
-    churnRisk: 26,
     confidenceScore: 86,
     projectedSavings: 9_800_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('Commercial', 1_400_000_000_000),
   },
   {
     id: 'WH011',
@@ -141,10 +189,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 5.8,
     recommendedRate: 5.0,
     sensitivity: 'High',
-    churnRisk: 42,
     confidenceScore: 78,
     projectedSavings: 7_840_000_000,
     lastUpdated: new Date('2025-11-05'),
+    mlVariables: generateMLVariables('Commercial', 980_000_000_000),
   },
   // GVI Segment
   {
@@ -155,10 +203,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.7,
     recommendedRate: 4.0,
     sensitivity: 'Low',
-    churnRisk: 14,
     confidenceScore: 92,
     projectedSavings: 8_750_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('GVI', 1_250_000_000_000),
   },
   {
     id: 'WH013',
@@ -168,10 +216,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.6,
     recommendedRate: 3.9,
     sensitivity: 'Low',
-    churnRisk: 16,
     confidenceScore: 90,
     projectedSavings: 7_700_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('GVI', 1_100_000_000_000),
   },
   {
     id: 'WH014',
@@ -181,10 +229,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.8,
     recommendedRate: 4.1,
     sensitivity: 'Medium',
-    churnRisk: 20,
     confidenceScore: 88,
     projectedSavings: 6_650_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('GVI', 950_000_000_000),
   },
   {
     id: 'WH015',
@@ -194,10 +242,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.9,
     recommendedRate: 4.2,
     sensitivity: 'Medium',
-    churnRisk: 23,
     confidenceScore: 87,
     projectedSavings: 9_450_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('GVI', 1_350_000_000_000),
   },
   {
     id: 'WH016',
@@ -207,10 +255,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 4.5,
     recommendedRate: 3.8,
     sensitivity: 'Low',
-    churnRisk: 17,
     confidenceScore: 89,
     projectedSavings: 6_160_000_000,
     lastUpdated: new Date('2025-11-08'),
+    mlVariables: generateMLVariables('GVI', 880_000_000_000),
   },
   // SME Segment
   {
@@ -221,10 +269,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.2,
     recommendedRate: 5.5,
     sensitivity: 'High',
-    churnRisk: 38,
     confidenceScore: 80,
     projectedSavings: 3_150_000_000,
     lastUpdated: new Date('2025-11-06'),
+    mlVariables: generateMLVariables('SME', 450_000_000_000),
   },
   {
     id: 'WH018',
@@ -234,10 +282,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.5,
     recommendedRate: 5.8,
     sensitivity: 'High',
-    churnRisk: 41,
     confidenceScore: 77,
     projectedSavings: 2_660_000_000,
     lastUpdated: new Date('2025-11-05'),
+    mlVariables: generateMLVariables('SME', 380_000_000_000),
   },
   {
     id: 'WH019',
@@ -247,10 +295,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.0,
     recommendedRate: 5.3,
     sensitivity: 'Medium',
-    churnRisk: 32,
     confidenceScore: 83,
     projectedSavings: 3_640_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('SME', 520_000_000_000),
   },
   {
     id: 'WH020',
@@ -260,10 +308,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.3,
     recommendedRate: 5.6,
     sensitivity: 'High',
-    churnRisk: 39,
     confidenceScore: 79,
     projectedSavings: 2_870_000_000,
     lastUpdated: new Date('2025-11-06'),
+    mlVariables: generateMLVariables('SME', 410_000_000_000),
   },
   {
     id: 'WH021',
@@ -273,10 +321,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.4,
     recommendedRate: 5.7,
     sensitivity: 'Medium',
-    churnRisk: 34,
     confidenceScore: 81,
     projectedSavings: 2_450_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('SME', 350_000_000_000),
   },
   {
     id: 'WH022',
@@ -286,10 +334,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.1,
     recommendedRate: 5.4,
     sensitivity: 'Medium',
-    churnRisk: 30,
     confidenceScore: 84,
     projectedSavings: 3_360_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('SME', 480_000_000_000),
   },
   {
     id: 'WH023',
@@ -299,10 +347,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.6,
     recommendedRate: 5.9,
     sensitivity: 'High',
-    churnRisk: 43,
     confidenceScore: 76,
     projectedSavings: 2_730_000_000,
     lastUpdated: new Date('2025-11-05'),
+    mlVariables: generateMLVariables('SME', 390_000_000_000),
   },
   {
     id: 'WH024',
@@ -312,10 +360,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.2,
     recommendedRate: 5.5,
     sensitivity: 'Medium',
-    churnRisk: 33,
     confidenceScore: 82,
     projectedSavings: 3_080_000_000,
     lastUpdated: new Date('2025-11-06'),
+    mlVariables: generateMLVariables('SME', 440_000_000_000),
   },
   {
     id: 'WH025',
@@ -325,10 +373,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.5,
     recommendedRate: 5.8,
     sensitivity: 'High',
-    churnRisk: 40,
     confidenceScore: 78,
     projectedSavings: 2_520_000_000,
     lastUpdated: new Date('2025-11-05'),
+    mlVariables: generateMLVariables('SME', 360_000_000_000),
   },
   {
     id: 'WH026',
@@ -338,10 +386,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 5.9,
     recommendedRate: 5.2,
     sensitivity: 'Medium',
-    churnRisk: 29,
     confidenceScore: 85,
     projectedSavings: 3_500_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('SME', 500_000_000_000),
   },
   {
     id: 'WH027',
@@ -351,10 +399,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.3,
     recommendedRate: 5.6,
     sensitivity: 'High',
-    churnRisk: 37,
     confidenceScore: 80,
     projectedSavings: 2_940_000_000,
     lastUpdated: new Date('2025-11-06'),
+    mlVariables: generateMLVariables('SME', 420_000_000_000),
   },
   {
     id: 'WH028',
@@ -364,10 +412,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.0,
     recommendedRate: 5.3,
     sensitivity: 'Medium',
-    churnRisk: 31,
     confidenceScore: 83,
     projectedSavings: 3_290_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('SME', 470_000_000_000),
   },
   {
     id: 'WH029',
@@ -377,10 +425,10 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.4,
     recommendedRate: 5.7,
     sensitivity: 'High',
-    churnRisk: 36,
     confidenceScore: 81,
     projectedSavings: 2_800_000_000,
     lastUpdated: new Date('2025-11-06'),
+    mlVariables: generateMLVariables('SME', 400_000_000_000),
   },
   {
     id: 'WH030',
@@ -390,9 +438,9 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     currentRate: 6.1,
     recommendedRate: 5.4,
     sensitivity: 'Medium',
-    churnRisk: 32,
     confidenceScore: 82,
     projectedSavings: 3_010_000_000,
     lastUpdated: new Date('2025-11-07'),
+    mlVariables: generateMLVariables('SME', 430_000_000_000),
   },
 ];

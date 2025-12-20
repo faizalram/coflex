@@ -18,11 +18,6 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: 'Dashboard',
-    path: '/',
-    icon: LayoutDashboard,
-  },
-  {
     label: 'TBW View',
     path: '/tbw',
     icon: Building2,
@@ -38,6 +33,11 @@ const navItems: NavItem[] = [
     label: 'What-if Simulator',
     path: '/simulator',
     icon: Calculator,
+  },
+  {
+    label: 'Dashboard',
+    path: '/',
+    icon: LayoutDashboard,
   },
 ];
 

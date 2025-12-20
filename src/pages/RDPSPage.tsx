@@ -3,7 +3,7 @@ import type { RetailSegment } from '@/types/segment';
 import { useSegments } from '@/hooks/useSegments';
 import { RetailSegmentList } from '@/components/rdps/RetailSegmentList';
 import { SegmentDetailCard } from '@/components/rdps/SegmentDetailCard';
-import { ChurnHeatmap } from '@/components/rdps/ChurnHeatmap';
+import { RetentionAnalysis } from '@/components/rdps/RetentionAnalysis';
 import { LoadingState } from '@/components/shared/LoadingState';
 import { AlertCircle } from 'lucide-react';
 
@@ -68,15 +68,15 @@ export function RDPSPage() {
             <SegmentDetailCard segment={selectedSegment} />
           </div>
 
-          {/* Churn Analysis */}
+          {/* Retention Analysis */}
           <div>
             <h2 className="mb-4 text-xl font-semibold text-purple-900 dark:text-purple-400">
-              Churn Risk Analysis
+              Retention Analysis
             </h2>
             {segmentsLoading ? (
               <LoadingState />
             ) : (
-              <ChurnHeatmap segments={segments} />
+              <RetentionAnalysis segments={segments} />
             )}
           </div>
         </div>
@@ -89,7 +89,7 @@ export function RDPSPage() {
             Select a Segment
           </h3>
           <p className="mt-2 text-sm text-purple-700 dark:text-purple-300">
-            Choose a retail segment from the list above to view details and churn analysis
+            Choose a retail segment from the list above to view details and retention analysis
           </p>
         </div>
       )}

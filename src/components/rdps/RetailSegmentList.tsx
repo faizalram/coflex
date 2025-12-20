@@ -26,7 +26,7 @@ interface RetailSegmentListProps {
   selectedSegmentId?: string;
 }
 
-type SortField = 'name' | 'customerCount' | 'totalBalance' | 'currentRate' | 'churnRisk';
+type SortField = 'name' | 'customerCount' | 'totalBalance' | 'currentRate' | 'retentionRate';
 type SortDirection = 'asc' | 'desc';
 
 // Balance tier categories for filtering
@@ -103,9 +103,9 @@ export function RetailSegmentList({
           aValue = a.currentRate;
           bValue = b.currentRate;
           break;
-        case 'churnRisk':
-          aValue = a.churnRisk;
-          bValue = b.churnRisk;
+        case 'retentionRate':
+          aValue = a.retentionRate;
+          bValue = b.retentionRate;
           break;
         default:
           aValue = a.totalBalance;
@@ -140,9 +140,9 @@ export function RetailSegmentList({
     return segment.currentRate - segment.recommendedRate;
   };
 
-  // Determine if segment is high priority (large customer base + high churn risk)
+  // Determine if segment is high priority (large customer base + low retention)
   const isHighPriority = (segment: RetailSegment) => {
-    return segment.customerCount > 5000 && segment.churnRisk > 30;
+    return segment.customerCount > 5000 && segment.retentionRate < 85;
   };
 
   return (
@@ -223,10 +223,10 @@ export function RetailSegmentList({
               <TableHead>Recommended Rate</TableHead>
               <TableHead
                 className="cursor-pointer select-none"
-                onClick={() => handleSort('churnRisk')}
+                onClick={() => handleSort('retentionRate')}
               >
                 <div className="flex items-center gap-2">
-                  Churn Risk
+                  Retention Rate
                   <ArrowUpDown className="h-4 w-4" />
                 </div>
               </TableHead>
@@ -272,17 +272,17 @@ export function RetailSegmentList({
                               <Star className="h-4 w-4 text-orange-600 fill-orange-600" />
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>High Priority: Large segment with elevated churn risk</p>
+                              <p>High Priority: Large segment with low retention rate</p>
                             </TooltipContent>
                           </Tooltip>
                         )}
-                        {segment.churnRisk > 40 && (
+                        {segment.retentionRate < 80 && (
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <AlertTriangle className="h-4 w-4 text-red-600" />
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Critical: Very high churn risk - immediate attention needed</p>
+                              <p>Critical: Very low retention rate - immediate attention needed</p>
                             </TooltipContent>
                           </Tooltip>
                         )}
@@ -318,17 +318,17 @@ export function RetailSegmentList({
                       <div className="flex items-center gap-2">
                         <span
                           className={`font-medium ${
-                            segment.churnRisk > 35
-                              ? 'text-red-600'
-                              : segment.churnRisk > 25
+                            segment.retentionRate > 90
+                              ? 'text-green-600'
+                              : segment.retentionRate > 85
                               ? 'text-orange-600'
-                              : 'text-green-600'
+                              : 'text-red-600'
                           }`}
                         >
-                          {formatPercentage(segment.churnRisk, 0)}
+                          {formatPercentage(segment.retentionRate, 0)}
                         </span>
-                        {segment.churnRisk > 35 && (
-                          <div className={`h-2 w-2 rounded-full ${segment.churnRisk > 40 ? 'bg-red-600' : 'bg-orange-600'} animate-pulse`} />
+                        {segment.retentionRate < 85 && (
+                          <div className={`h-2 w-2 rounded-full ${segment.retentionRate < 80 ? 'bg-red-600' : 'bg-orange-600'} animate-pulse`} />
                         )}
                       </div>
                     </TableCell>

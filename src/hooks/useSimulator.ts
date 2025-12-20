@@ -45,11 +45,12 @@ export function useSimulator(params?: UseSimulatorParams): UseSimulatorResult {
       setError(null);
       const dataService = getDataService();
 
-      // Generate three scenarios: baseline, optimistic, pessimistic
+      // Generate three scenarios with more intuitive adjustments
+      const baselineAdjustment = recommendedRate - currentRate; // AI recommended adjustment
       const scenarioTypes = [
-        { adjustment: 0, type: 'baseline' as const },
-        { adjustment: rateAdjustment - 0.5, type: 'optimistic' as const },
-        { adjustment: rateAdjustment + 0.5, type: 'pessimistic' as const },
+        { adjustment: baselineAdjustment, type: 'baseline' as const },
+        { adjustment: rateAdjustment, type: 'optimistic' as const },
+        { adjustment: rateAdjustment + (rateAdjustment < 0 ? -0.3 : 0.3), type: 'pessimistic' as const },
       ];
 
       const scenarioPromises = scenarioTypes.map((scenario) =>

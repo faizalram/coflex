@@ -1,3 +1,11 @@
+export interface MLModelVariables {
+  kopraTransaction: number;        // Transaction volume/count
+  livinTransaction: number;        // Livin app transaction volume/count
+  tradeFinanceTransaction: number; // Trade finance transaction volume/count
+  livinMerchantTransaction: number; // Livin merchant transaction volume/count
+  loanPortfolio: number;          // Loan portfolio value in IDR
+}
+
 export interface Recommendation {
   id: string;
   customerId: string;
@@ -8,7 +16,7 @@ export interface Recommendation {
   rationale: string;
   impact: {
     savingsAmount: number;
-    churnRiskChange: number;
   };
   confidence: 'High' | 'Medium' | 'Low';
+  mlVariables: MLModelVariables;   // ML model input variables
 }

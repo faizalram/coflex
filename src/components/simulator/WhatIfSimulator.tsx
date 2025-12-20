@@ -75,7 +75,7 @@ export function WhatIfSimulator() {
         <div>
           <h2 className="text-2xl font-bold mb-2">What-If Scenario Simulator</h2>
           <p className="text-muted-foreground">
-            Simulate different interest rate scenarios and analyze their impact on churn risk and cost of funds
+            Simulate different interest rate scenarios and analyze their impact on cost of funds and customer retention
           </p>
         </div>
         <div className="flex gap-2">
@@ -143,29 +143,37 @@ export function WhatIfSimulator() {
         <ScenarioComparison scenarios={scenarios} currentRate={currentRate} />
       )}
 
-      {/* Info Card */}
-      <Card className="p-4 bg-blue-50 border-blue-200">
-        <div className="flex gap-3">
-          <div className="text-blue-600 mt-0.5">
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+      {/* Enhanced Info Card */}
+      <Card className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 border-2 border-blue-300 dark:border-blue-800 shadow-md">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="text-blue-600 dark:text-blue-400 flex-shrink-0">
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h4 className="font-bold text-lg text-blue-900 dark:text-blue-100">How to Use This Simulator</h4>
           </div>
-          <div className="flex-1">
-            <h4 className="font-semibold text-blue-900 mb-1">How to use the simulator</h4>
-            <p className="text-sm text-blue-800">
-              Adjust the interest rate slider to see how different rate changes affect churn risk and cost of funds.
-              The baseline scenario shows the recommended rate, while optimistic and pessimistic scenarios show
-              potential outcomes with rate adjustments.
-            </p>
+          
+          <div className="grid md:grid-cols-2 gap-4 text-sm text-blue-900 dark:text-blue-200">
+            <div className="space-y-2">
+              <p><strong className="text-blue-950 dark:text-blue-100">Step 1:</strong> Select a customer from the dropdown above</p>
+              <p><strong className="text-blue-950 dark:text-blue-100">Step 2:</strong> Use the slider below to adjust their interest rate</p>
+              <p><strong className="text-blue-950 dark:text-blue-100">Step 3:</strong> Compare the three scenarios that appear</p>
+            </div>
+            <div className="space-y-2">
+              <p><strong className="text-blue-950 dark:text-blue-100">💡 Tip:</strong> The first scenario shows our AI recommendation</p>
+              <p><strong className="text-blue-950 dark:text-blue-100">⚖️ Remember:</strong> Lower rates save money but may reduce customer satisfaction</p>
+              <p><strong className="text-blue-950 dark:text-blue-100">🎯 Goal:</strong> Find the best balance for your strategy</p>
+            </div>
           </div>
         </div>
       </Card>

@@ -10,7 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { TrendingDown, TrendingUp, AlertTriangle, CheckCircle2, Info, Sparkles, Loader2 } from 'lucide-react';
+import { TrendingDown, TrendingUp, CheckCircle2, Info, Sparkles, Loader2 } from 'lucide-react';
 import { getDataService } from '@/services/dataService';
 
 interface CustomerDetailCardProps {
@@ -49,15 +49,6 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
       setIsAnalyzing(false);
     }
   };
-
-  // Determine churn risk level and color
-  const getChurnRiskLevel = (risk: number) => {
-    if (risk > 35) return { level: 'High', color: 'text-rose-600', bgColor: 'bg-rose-50' };
-    if (risk > 25) return { level: 'Medium', color: 'text-amber-600', bgColor: 'bg-amber-50' };
-    return { level: 'Low', color: 'text-emerald-700', bgColor: 'bg-emerald-50' };
-  };
-
-  const churnRiskInfo = getChurnRiskLevel(displayCustomer.churnRisk);
 
   // Determine confidence level
   const getConfidenceLevel = (score: number) => {
@@ -167,66 +158,6 @@ export function CustomerDetailCard({ customer, onCustomerUpdate }: CustomerDetai
               </div>
             )}
           </div>
-        </div>
-
-        {/* Churn Risk */}
-        <div>
-          <div className="mb-2 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-neutral-700">Churn Risk</span>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-neutral-500 cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>
-                    {displayCustomer.churnRisk > 35 && 'High Risk (>35%): Immediate action recommended'}
-                    {displayCustomer.churnRisk > 25 && displayCustomer.churnRisk <= 35 && 'Medium Risk (25-35%): Monitor closely'}
-                    {displayCustomer.churnRisk <= 25 && 'Low Risk (≤25%): Customer is stable'}
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
-            <Badge
-              variant={
-                churnRiskInfo.level === 'High'
-                  ? 'destructive'
-                  : churnRiskInfo.level === 'Medium'
-                  ? 'secondary'
-                  : 'default'
-              }
-            >
-              {churnRiskInfo.level}
-            </Badge>
-          </div>
-          <div className="relative">
-            {/* Progress bar background */}
-            <div className="h-8 w-full overflow-hidden rounded-lg bg-neutral-200 dark:bg-neutral-800">
-              {/* Progress bar fill */}
-              <div
-                className={`h-full transition-all duration-500 ${
-                  displayCustomer.churnRisk > 35
-                    ? 'bg-red-500'
-                    : displayCustomer.churnRisk > 25
-                    ? 'bg-orange-500'
-                    : 'bg-green-500'
-                }`}
-                style={{ width: `${displayCustomer.churnRisk}%` }}
-              />
-            </div>
-            {/* Percentage label */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
-                {formatPercentage(displayCustomer.churnRisk, 0)}
-              </span>
-            </div>
-          </div>
-          {displayCustomer.churnRisk > 35 && (
-            <div className="mt-2 flex items-center gap-2 text-sm text-red-600">
-              <AlertTriangle className="h-4 w-4" />
-              <span>High churn risk - consider proactive engagement</span>
-            </div>
-          )}
         </div>
 
         {/* Projected Savings */}

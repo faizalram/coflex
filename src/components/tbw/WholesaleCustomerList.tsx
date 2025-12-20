@@ -26,7 +26,7 @@ interface WholesaleCustomerListProps {
   selectedCustomerId?: string;
 }
 
-type SortField = 'name' | 'balance' | 'currentRate' | 'churnRisk';
+type SortField = 'name' | 'balance' | 'currentRate' | 'projectedSavings';
 type SortDirection = 'asc' | 'desc';
 
 export function WholesaleCustomerList({
@@ -74,9 +74,9 @@ export function WholesaleCustomerList({
           aValue = a.currentRate;
           bValue = b.currentRate;
           break;
-        case 'churnRisk':
-          aValue = a.churnRisk;
-          bValue = b.churnRisk;
+        case 'projectedSavings':
+          aValue = a.projectedSavings;
+          bValue = b.projectedSavings;
           break;
         default:
           aValue = a.name;
@@ -119,9 +119,9 @@ export function WholesaleCustomerList({
     }
   };
 
-  // Determine if customer is high priority (high balance + high churn risk)
+  // Determine if customer is high priority (high balance + high sensitivity)
   const isHighPriority = (customer: WholesaleCustomer) => {
-    return customer.currentBalance > 1_000_000_000_000 && customer.churnRisk > 30;
+    return customer.currentBalance > 1_000_000_000_000 && customer.sensitivity === 'High';
   };
 
   return (
@@ -195,10 +195,10 @@ export function WholesaleCustomerList({
               <TableHead>Sensitivity</TableHead>
               <TableHead
                 className="cursor-pointer select-none"
-                onClick={() => handleSort('churnRisk')}
+                onClick={() => handleSort('projectedSavings')}
               >
                 <div className="flex items-center gap-2">
-                  Churn Risk
+                  Projected Savings
                   <ArrowUpDown className="h-4 w-4" />
                 </div>
               </TableHead>
@@ -241,17 +241,17 @@ export function WholesaleCustomerList({
                             <Star className="h-4 w-4 text-orange-600 fill-orange-600" />
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>High Priority: Large balance with elevated churn risk</p>
+                            <p>High Priority: Large balance with high rate sensitivity</p>
                           </TooltipContent>
                         </Tooltip>
                       )}
-                      {customer.churnRisk > 40 && (
+                      {customer.sensitivity === 'High' && (
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <AlertTriangle className="h-4 w-4 text-red-600" />
+                            <AlertTriangle className="h-4 w-4 text-amber-600" />
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p>Critical: Very high churn risk - immediate attention needed</p>
+                            <p>High Sensitivity: Customer is very responsive to rate changes</p>
                           </TooltipContent>
                         </Tooltip>
                       )}
@@ -271,21 +271,10 @@ export function WholesaleCustomerList({
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`font-medium ${
-                          customer.churnRisk > 35
-                            ? 'text-red-600'
-                            : customer.churnRisk > 25
-                            ? 'text-orange-600'
-                            : 'text-green-600'
-                        }`}
-                      >
-                        {formatPercentage(customer.churnRisk, 0)}
+                    <div className="flex items-center gap-1">
+                      <span className="font-medium text-emerald-600">
+                        {formatCurrency(customer.projectedSavings, true)}
                       </span>
-                      {customer.churnRisk > 35 && (
-                        <div className={`h-2 w-2 rounded-full ${customer.churnRisk > 40 ? 'bg-red-600' : 'bg-orange-600'} animate-pulse`} />
-                      )}
                     </div>
                   </TableCell>
                 </TableRow>

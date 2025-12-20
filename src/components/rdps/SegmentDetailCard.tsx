@@ -10,9 +10,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { TrendingDown, TrendingUp, Users, AlertTriangle, CheckCircle2, Info, Sparkles, Loader2 } from 'lucide-react';
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { TrendingDown, TrendingUp, Users, CheckCircle2, Info, Sparkles, Loader2 } from 'lucide-react';
 import { getDataService } from '@/services/dataService';
+import { MLVariablesCard } from '@/components/shared/MLVariablesCard';
 
 interface SegmentDetailCardProps {
   segment: RetailSegment;
@@ -50,21 +50,6 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
       setIsAnalyzing(false);
     }
   };
-
-  // Determine churn risk level and color
-  const getChurnRiskLevel = (risk: number) => {
-    if (risk > 35) return { level: 'High', color: 'text-rose-600', bgColor: 'bg-rose-50' };
-    if (risk > 25) return { level: 'Medium', color: 'text-amber-600', bgColor: 'bg-amber-50' };
-    return { level: 'Low', color: 'text-emerald-700', bgColor: 'bg-emerald-50' };
-  };
-
-  const churnRiskInfo = getChurnRiskLevel(displaySegment.churnRisk);
-
-  // Prepare data for retention rate visualization
-  const retentionData = [
-    { name: 'Retained', value: displaySegment.retentionRate, color: '#10b981' },
-    { name: 'At Risk', value: 100 - displaySegment.retentionRate, color: '#ef4444' },
-  ];
 
   // Calculate average balance per customer
   const avgBalancePerCustomer = displaySegment.totalBalance / displaySegment.customerCount;
@@ -189,117 +174,6 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
           </div>
         </div>
 
-        {/* Churn Risk */}
-        <div>
-          <div className="mb-2 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-neutral-700">Churn Risk</span>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-neutral-500 cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>
-                    {displaySegment.churnRisk > 35 && 'High Risk (>35%): Immediate action recommended'}
-                    {displaySegment.churnRisk > 25 && displaySegment.churnRisk <= 35 && 'Medium Risk (25-35%): Monitor closely'}
-                    {displaySegment.churnRisk <= 25 && 'Low Risk (≤25%): Segment is stable'}
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
-            <Badge
-              variant={
-                churnRiskInfo.level === 'High'
-                  ? 'destructive'
-                  : churnRiskInfo.level === 'Medium'
-                  ? 'secondary'
-                  : 'default'
-              }
-            >
-              {churnRiskInfo.level}
-            </Badge>
-          </div>
-          <div className="relative">
-            {/* Progress bar background */}
-            <div className="h-8 w-full overflow-hidden rounded-lg bg-neutral-200">
-              {/* Progress bar fill */}
-              <div
-                className={`h-full transition-all duration-500 ${
-                  displaySegment.churnRisk > 35
-                    ? 'bg-red-500'
-                    : displaySegment.churnRisk > 25
-                    ? 'bg-orange-500'
-                    : 'bg-green-500'
-                }`}
-                style={{ width: `${displaySegment.churnRisk}%` }}
-              />
-            </div>
-            {/* Percentage label */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-bold text-neutral-900">
-                {formatPercentage(displaySegment.churnRisk, 0)}
-              </span>
-            </div>
-          </div>
-          {displaySegment.churnRisk > 35 && (
-            <div className="mt-2 flex items-center gap-2 text-sm text-red-600">
-              <AlertTriangle className="h-4 w-4" />
-              <span>High churn risk - consider rate adjustment</span>
-            </div>
-          )}
-        </div>
-
-        {/* Expected Retention Rate with Visual */}
-        <div>
-          <div className="mb-2 text-sm font-medium text-neutral-700">
-            Expected Retention Rate
-          </div>
-          <div className="flex items-center gap-4">
-            {/* Pie chart visualization */}
-            <div className="h-24 w-24">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={retentionData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={25}
-                    outerRadius={40}
-                    paddingAngle={2}
-                    dataKey="value"
-                    animationBegin={0}
-                    animationDuration={1500}
-                    animationEasing="ease-out"
-                  >
-                    {retentionData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-            {/* Percentage and indicator */}
-            <div className="flex-1">
-              <div className="text-3xl font-bold text-emerald-700">
-                {formatPercentage(segment.retentionRate, 0)}
-              </div>
-              <div className="mt-1 text-sm text-neutral-600">
-                of customers expected to stay
-              </div>
-              <div className="mt-2 flex items-center gap-2">
-                <div className="flex items-center gap-1">
-                  <div className="h-3 w-3 rounded-full bg-green-500" />
-                  <span className="text-xs text-neutral-600">Retained</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <div className="h-3 w-3 rounded-full bg-red-500" />
-                  <span className="text-xs text-neutral-600">At Risk</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Projected Savings */}
         <div className={`rounded-lg p-4 ${isRateDecrease ? 'bg-green-50' : 'bg-orange-50'}`}>
           <div className="text-sm font-medium text-neutral-700">
@@ -350,6 +224,14 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
             </span>
           </div>
         </div>
+
+        {/* ML Model Variables for Segment */}
+        {displaySegment.mlVariables && (
+          <MLVariablesCard 
+            variables={displaySegment.mlVariables}
+            title="Segment AI Model Analysis"
+          />
+        )}
       </CardContent>
     </Card>
     </TooltipProvider>

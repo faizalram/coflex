@@ -3,7 +3,6 @@ export interface Scenario {
   name: string;
   type: 'baseline' | 'optimistic' | 'pessimistic' | 'custom';
   rateAdjustment: number;        // percentage change
-  projectedChurnRisk: number;
   projectedSavings: number;
   projectedRetention: number;
 }
