@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Activity, Target, TrendingUp, Zap } from 'lucide-react';
 import { formatPercentage } from '@/utils/formatters';
+import { useTheme } from '@/hooks/useTheme';
 import type { ModelPerformanceMetrics, ModelPerformanceTrend } from '@/types/modelPerformance';
 
 interface ModelPerformanceProps {
@@ -100,6 +101,9 @@ function MetricGaugeCard({ data, loading }: { data: MetricCardData; loading?: bo
 }
 
 function PerformanceTrendChart({ data, loading }: { data: ModelPerformanceTrend[]; loading?: boolean }) {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   if (loading) {
     return (
       <Card>
@@ -128,33 +132,36 @@ function PerformanceTrendChart({ data, loading }: { data: ModelPerformanceTrend[
             data={data}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           >
-            <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
+            <CartesianGrid strokeDasharray="3 3" stroke={isDark ? '#374151' : '#e5e7eb'} />
             <XAxis
               dataKey="month"
-              tick={{ fontSize: 12, fill: 'currentColor' }}
-              className="text-gray-600 dark:text-gray-400"
-              stroke="currentColor"
+              tick={{ fontSize: 12, fill: isDark ? '#9ca3af' : '#6b7280' }}
+              tickLine={{ stroke: isDark ? '#374151' : '#e5e7eb' }}
+              axisLine={{ stroke: isDark ? '#374151' : '#e5e7eb' }}
             />
             <YAxis
               domain={[80, 100]}
-              tick={{ fontSize: 12, fill: 'currentColor' }}
-              className="text-gray-600 dark:text-gray-400"
-              stroke="currentColor"
+              tick={{ fontSize: 12, fill: isDark ? '#9ca3af' : '#6b7280' }}
+              tickLine={{ stroke: isDark ? '#374151' : '#e5e7eb' }}
+              axisLine={{ stroke: isDark ? '#374151' : '#e5e7eb' }}
               tickFormatter={(value) => `${value}%`}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: 'var(--background)',
-                border: '1px solid var(--border)',
+                backgroundColor: isDark ? '#1f2937' : '#ffffff',
+                border: `1px solid ${isDark ? '#374151' : '#e5e7eb'}`,
                 borderRadius: '8px',
                 padding: '12px',
-                color: 'var(--foreground)',
+                color: isDark ? '#f9fafb' : '#111827',
               }}
               formatter={(value: number) => [`${value.toFixed(1)}%`, '']}
             />
             <Legend
               wrapperStyle={{ paddingTop: '20px' }}
               iconType="line"
+              formatter={(value) => (
+                <span style={{ color: isDark ? '#d1d5db' : '#374151', fontSize: '14px' }}>{value}</span>
+              )}
             />
             <Line
               type="monotone"

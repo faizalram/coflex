@@ -71,16 +71,16 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
         {/* Customer Count and Total Balance */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="text-sm text-neutral-500">Total Customers</div>
+            <div className="text-sm text-neutral-500 dark:text-neutral-400">Total Customers</div>
             <div className="mt-1 flex items-center gap-2">
-              <Users className="h-5 w-5 text-neutral-500" />
+              <Users className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
               <span className="text-2xl font-bold">
                 {displaySegment.customerCount.toLocaleString('id-ID')}
               </span>
             </div>
           </div>
           <div>
-            <div className="text-sm text-neutral-500">Total Balance</div>
+            <div className="text-sm text-neutral-500 dark:text-neutral-400">Total Balance</div>
             <div className="mt-1 text-2xl font-bold">
               {formatCurrency(displaySegment.totalBalance, true)}
             </div>
@@ -88,26 +88,26 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
         </div>
 
         {/* Average Balance per Customer */}
-        <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-3">
-          <div className="text-sm text-neutral-500">Avg Balance per Customer</div>
-          <div className="mt-1 text-lg font-bold text-neutral-900">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 p-3">
+          <div className="text-sm text-neutral-500 dark:text-neutral-400">Avg Balance per Customer</div>
+          <div className="mt-1 text-lg font-bold text-neutral-900 dark:text-neutral-100">
             {formatCurrency(avgBalancePerCustomer, true)}
           </div>
         </div>
 
         {/* Current Rate */}
         <div>
-          <div className="text-sm text-neutral-500">Current Interest Rate</div>
+          <div className="text-sm text-neutral-500 dark:text-neutral-400">Current Interest Rate</div>
           <div className="mt-1 text-2xl font-bold">
             {formatPercentage(displaySegment.currentRate)}
           </div>
         </div>
 
         {/* Recommended Rate with Visual Chart */}
-        <div className="rounded-lg border-2 border-primary-200 bg-primary-50 p-4">
+        <div className="rounded-lg border-2 border-primary-200 dark:border-primary-800 bg-primary-50 dark:bg-primary-900/30 p-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-primary-900">
+              <div className="text-sm font-medium text-primary-900 dark:text-primary-100">
                 Adaptive Interest Rate Recommendation
               </div>
               {displaySegment.isAnalyzed && (
@@ -142,7 +142,7 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
                 </div>
               )}
             </div>
-            <div className="text-xs text-primary-800">
+            <div className="text-xs text-primary-800 dark:text-primary-300">
               Optimized for {formatPercentage(displaySegment.retentionRate, 0)} retention rate
             </div>
             
@@ -175,27 +175,27 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
         </div>
 
         {/* Projected Savings */}
-        <div className={`rounded-lg p-4 ${isRateDecrease ? 'bg-green-50' : 'bg-orange-50'}`}>
-          <div className="text-sm font-medium text-neutral-700">
+        <div className={`rounded-lg p-4 ${isRateDecrease ? 'bg-green-50 dark:bg-green-900/30' : 'bg-orange-50 dark:bg-orange-900/30'}`}>
+          <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
             Projected Annual Savings
           </div>
-          <div className={`mt-1 text-2xl font-bold ${isRateDecrease ? 'text-emerald-700' : 'text-amber-600'}`}>
+          <div className={`mt-1 text-2xl font-bold ${isRateDecrease ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
             {isRateDecrease ? '+' : '-'}{formatCurrency(Math.abs(displaySegment.projectedSavings), true)}
           </div>
-          <div className="mt-1 text-xs text-neutral-600">
+          <div className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
             Based on recommended rate adjustment
           </div>
         </div>
 
         {/* Average Sensitivity */}
-        <div className="flex items-center justify-between rounded-lg border border-neutral-200 p-3">
+        <div className="flex items-center justify-between rounded-lg border border-neutral-200 dark:border-neutral-700 p-3">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-neutral-700">
+            <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Average Rate Sensitivity
             </span>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-neutral-500 cursor-help" />
+                <Info className="h-4 w-4 text-neutral-500 dark:text-neutral-400 cursor-help" />
               </TooltipTrigger>
               <TooltipContent>
                 <p>
@@ -207,7 +207,7 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
             </Tooltip>
           </div>
           <div className="flex items-center gap-2">
-            <div className="relative h-2 w-24 overflow-hidden rounded-full bg-neutral-200">
+            <div className="relative h-2 w-24 overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700">
               <div
                 className={`h-full transition-all duration-500 ${
                   displaySegment.avgSensitivity > 60
@@ -219,7 +219,7 @@ export function SegmentDetailCard({ segment, onSegmentUpdate }: SegmentDetailCar
                 style={{ width: `${displaySegment.avgSensitivity}%` }}
               />
             </div>
-            <span className="text-sm font-bold text-neutral-900">
+            <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
               {displaySegment.avgSensitivity}%
             </span>
           </div>

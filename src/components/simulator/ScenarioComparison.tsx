@@ -80,7 +80,7 @@ export function ScenarioComparison({ scenarios, currentRate }: ScenarioCompariso
     const isPositive = savings >= 0;
     return {
       isPositive,
-      color: isPositive ? 'text-emerald-700' : 'text-rose-600',
+      color: isPositive ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400',
       icon: isPositive ? <TrendingDown className="h-4 w-4" /> : <TrendingUp className="h-4 w-4" />,
       label: isPositive ? 'Bank Saves Money' : 'Bank Pays More',
       description: isPositive 
@@ -177,7 +177,7 @@ export function ScenarioComparison({ scenarios, currentRate }: ScenarioCompariso
                           </Tooltip>
                         </div>
                         <div className="flex items-center gap-1">
-                          <span className={`text-xs font-medium ${savingsInfo.color} dark:${savingsInfo.color.replace('text-', 'text-').replace('-600', '-400').replace('-700', '-400')}`}>
+                          <span className={`text-xs font-medium ${savingsInfo.color}`}>
                             {savingsInfo.label}
                           </span>
                         </div>
@@ -190,10 +190,10 @@ export function ScenarioComparison({ scenarios, currentRate }: ScenarioCompariso
                       }`}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1">
-                            <span className={`${savingsInfo.color} dark:${savingsInfo.color.replace('text-', 'text-').replace('-600', '-400').replace('-700', '-400')}`}>
+                            <span className={`${savingsInfo.color}`}>
                               {savingsInfo.icon}
                             </span>
-                            <span className={`font-bold text-base ${savingsInfo.color} dark:${savingsInfo.color.replace('text-', 'text-').replace('-600', '-400').replace('-700', '-400')}`}>
+                            <span className={`font-bold text-base ${savingsInfo.color}`}>
                               {formatCurrency(Math.abs(scenario.projectedSavings), true)}
                             </span>
                           </div>

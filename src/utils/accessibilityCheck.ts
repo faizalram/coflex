@@ -61,18 +61,27 @@ export const darkModeColors = {
 
 /**
  * Light mode color palette
+ *
+ * Note on muted-foreground (#737373 / neutral-500):
+ *   - On background (#FAFAFA): 4.54:1 — passes WCAG AA ✓
+ *   - On card (#FFFFFF):       4.74:1 — passes WCAG AA ✓
+ *   - On muted (#F5F5F5):      4.35:1 — fails WCAG AA for normal text ✗
+ *
+ * Components that place text on bg-neutral-100 (#F5F5F5) use neutral-600 (#525252)
+ * instead of neutral-500 to ensure compliance (e.g. TabsList, Dialog close button).
  */
 export const lightModeColors = {
   // Background colors
-  background: [250, 250, 250] as [number, number, number], // #FAFAFA
+  background: [250, 250, 250] as [number, number, number], // #FAFAFA (neutral-50)
   card: [255, 255, 255] as [number, number, number], // #FFFFFF
-  muted: [245, 245, 245] as [number, number, number], // #F5F5F5
-  border: [229, 229, 229] as [number, number, number], // #E5E5E5
-  
+  muted: [245, 245, 245] as [number, number, number], // #F5F5F5 (neutral-100)
+  border: [229, 229, 229] as [number, number, number], // #E5E5E5 (neutral-200)
+
   // Text colors
-  foreground: [23, 23, 23] as [number, number, number], // #171717
-  mutedForeground: [115, 115, 115] as [number, number, number], // #737373
-  
+  foreground: [23, 23, 23] as [number, number, number], // #171717 (neutral-900)
+  mutedForeground: [115, 115, 115] as [number, number, number], // #737373 (neutral-500) — use on background/card only
+  mutedForegroundOnMuted: [82, 82, 82] as [number, number, number], // #525252 (neutral-600) — use on muted/neutral-100 bg
+
   // Accent colors
   primary: [59, 130, 246] as [number, number, number], // #3b82f6
   success: [16, 185, 129] as [number, number, number], // #10b981
@@ -110,6 +119,7 @@ export function verifyDarkModeContrast(): Record<string, { ratio: number; passes
 
 /**
  * Verify contrast ratios for light mode
+ * All combinations verified against WCAG 2.1 AA (4.5:1 normal text, 3:1 large text)
  */
 export function verifyLightModeContrast(): Record<string, { ratio: number; passes: boolean }> {
   return {
@@ -121,6 +131,11 @@ export function verifyLightModeContrast(): Record<string, { ratio: number; passe
       ratio: getContrastRatio(lightModeColors.foreground, lightModeColors.card),
       passes: meetsWCAGAA(getContrastRatio(lightModeColors.foreground, lightModeColors.card)),
     },
+    'foreground-on-muted': {
+      ratio: getContrastRatio(lightModeColors.foreground, lightModeColors.muted),
+      passes: meetsWCAGAA(getContrastRatio(lightModeColors.foreground, lightModeColors.muted)),
+    },
+    // neutral-500 (#737373) — safe on background and card, but NOT on muted/neutral-100
     'muted-foreground-on-background': {
       ratio: getContrastRatio(lightModeColors.mutedForeground, lightModeColors.background),
       passes: meetsWCAGAA(getContrastRatio(lightModeColors.mutedForeground, lightModeColors.background)),
@@ -128,6 +143,16 @@ export function verifyLightModeContrast(): Record<string, { ratio: number; passe
     'muted-foreground-on-card': {
       ratio: getContrastRatio(lightModeColors.mutedForeground, lightModeColors.card),
       passes: meetsWCAGAA(getContrastRatio(lightModeColors.mutedForeground, lightModeColors.card)),
+    },
+    // neutral-500 on neutral-100 FAILS (4.35:1) — components use neutral-600 instead
+    'muted-foreground-on-muted': {
+      ratio: getContrastRatio(lightModeColors.mutedForeground, lightModeColors.muted),
+      passes: meetsWCAGAA(getContrastRatio(lightModeColors.mutedForeground, lightModeColors.muted)),
+    },
+    // neutral-600 (#525252) — used in TabsList and Dialog close button on neutral-100 bg
+    'muted-foreground-on-muted-corrected': {
+      ratio: getContrastRatio(lightModeColors.mutedForegroundOnMuted, lightModeColors.muted),
+      passes: meetsWCAGAA(getContrastRatio(lightModeColors.mutedForegroundOnMuted, lightModeColors.muted)),
     },
     'primary-on-background': {
       ratio: getContrastRatio(lightModeColors.primary, lightModeColors.background),

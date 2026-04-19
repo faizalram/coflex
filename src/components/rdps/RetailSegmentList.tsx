@@ -174,7 +174,7 @@ export function RetailSegmentList({
       </div>
 
       {/* Results count */}
-      <div className="text-sm text-neutral-600">
+      <div className="text-sm text-neutral-600 dark:text-neutral-400">
         Showing {filteredAndSortedSegments.length} of {segments.length} segments
       </div>
 
@@ -248,7 +248,7 @@ export function RetailSegmentList({
                 return (
                   <TableRow
                     key={segment.id}
-                    className={`cursor-pointer ${highPriority ? 'bg-orange-50/50' : ''}`}
+                    className={`cursor-pointer ${highPriority ? 'bg-orange-50/50 dark:bg-orange-950/30' : ''}`}
                     data-state={
                       selectedSegmentId === segment.id ? 'selected' : undefined
                     }

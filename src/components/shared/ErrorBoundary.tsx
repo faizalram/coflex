@@ -38,25 +38,25 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-6">
-          <div className="bg-white rounded-lg border border-neutral-200 p-8 max-w-md w-full text-center">
+        <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center p-6">
+          <div className="bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800 p-8 max-w-md w-full text-center">
             <div className="flex justify-center mb-4">
               <div className="h-16 w-16 rounded-full bg-danger-50 flex items-center justify-center">
                 <AlertTriangle className="h-8 w-8 text-danger-500" />
               </div>
             </div>
             
-            <h2 className="text-xl font-bold text-neutral-900 mb-2">
+            <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2">
               Something went wrong
             </h2>
             
-            <p className="text-neutral-600 mb-6">
+            <p className="text-neutral-600 dark:text-neutral-400 mb-6">
               We encountered an unexpected error. Please try again or contact support if the problem persists.
             </p>
 
             {this.state.error && (
-              <div className="mb-6 p-4 bg-neutral-50 rounded-lg text-left">
-                <p className="text-xs font-mono text-neutral-700 break-all">
+              <div className="mb-6 p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg text-left">
+                <p className="text-xs font-mono text-neutral-700 dark:text-neutral-300 break-all">
                   {this.state.error.message}
                 </p>
               </div>
@@ -94,18 +94,18 @@ export function ErrorMessage({
   onRetry 
 }: ErrorMessageProps) {
   return (
-    <div className="bg-white rounded-lg border border-danger-200 p-6 text-center">
+    <div className="bg-white dark:bg-neutral-900 rounded-lg border border-danger-200 dark:border-danger-800 p-6 text-center">
       <div className="flex justify-center mb-4">
         <div className="h-12 w-12 rounded-full bg-danger-50 flex items-center justify-center">
           <AlertTriangle className="h-6 w-6 text-danger-500" />
         </div>
       </div>
       
-      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+      <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
         {title}
       </h3>
       
-      <p className="text-neutral-600 mb-4">
+      <p className="text-neutral-600 dark:text-neutral-400 mb-4">
         {message}
       </p>
 

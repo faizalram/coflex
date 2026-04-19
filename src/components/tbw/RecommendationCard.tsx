@@ -111,7 +111,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
                     </Tooltip>
                   )}
                 </div>
-                <p className="mt-1 text-sm text-neutral-600">
+                <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
                   {recommendation.description}
                 </p>
               </div>
@@ -126,8 +126,8 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
         <CardContent className="space-y-4">
           {/* Impact Metrics */}
           <div className="grid grid-cols-1 gap-4">
-            <div className="rounded-lg bg-neutral-50 p-3">
-              <div className="text-xs text-neutral-600">Savings Impact</div>
+            <div className="rounded-lg bg-neutral-50 dark:bg-neutral-800 p-3">
+              <div className="text-xs text-neutral-600 dark:text-neutral-400">Savings Impact</div>
               <div
                 className={`mt-1 text-lg font-bold ${
                   recommendation.impact.savingsAmount >= 0
@@ -144,8 +144,8 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
           {/* Confidence Indicator */}
           <Tooltip>
             <TooltipTrigger asChild>
-              <div className="flex items-center justify-between rounded-lg border border-neutral-200 p-3 cursor-help">
-                <span className="text-sm font-medium text-neutral-700">
+              <div className="flex items-center justify-between rounded-lg border border-neutral-200 dark:border-neutral-700 p-3 cursor-help">
+                <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                   Confidence Level
                 </span>
                 <div className="flex items-center gap-2">
@@ -199,7 +199,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
             {/* Priority and Confidence */}
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-neutral-700">
+                <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                   Priority:
                 </span>
                 <Badge variant={getPriorityVariant(recommendation.priority)}>
@@ -207,7 +207,7 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
                 </Badge>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-neutral-700">
+                <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                   Confidence:
                 </span>
                 <Badge variant={confidenceInfo.variant}>
@@ -218,11 +218,11 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
 
             {/* Detailed Rationale */}
             <div>
-              <h4 className="mb-2 text-sm font-semibold text-neutral-900">
+              <h4 className="mb-2 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                 Detailed Analysis
               </h4>
-              <div className="rounded-lg bg-neutral-50 p-4">
-                <p className="text-sm leading-relaxed text-neutral-700">
+              <div className="rounded-lg bg-neutral-50 dark:bg-neutral-800 p-4">
+                <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
                   {recommendation.rationale}
                 </p>
               </div>
@@ -230,12 +230,12 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
 
             {/* Impact Details */}
             <div>
-              <h4 className="mb-3 text-sm font-semibold text-neutral-900">
+              <h4 className="mb-3 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                 Expected Impact
               </h4>
               <div className="grid grid-cols-1 gap-4">
-                <div className="rounded-lg border border-neutral-200 p-4">
-                  <div className="text-xs font-medium text-neutral-600">
+                <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 p-4">
+                  <div className="text-xs font-medium text-neutral-600 dark:text-neutral-400">
                     Annual Savings
                   </div>
                   <div

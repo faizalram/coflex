@@ -153,7 +153,7 @@ export function WholesaleCustomerList({
       </div>
 
       {/* Results count */}
-      <div className="text-sm text-neutral-600">
+      <div className="text-sm text-neutral-600 dark:text-neutral-400">
         Showing {filteredAndSortedCustomers.length} of {customers.length}{' '}
         customers
       </div>
