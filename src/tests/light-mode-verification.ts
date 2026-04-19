@@ -285,7 +285,7 @@ function verifyLightModeComponents(): VerificationResult {
 /**
  * Run all light mode verification tests
  */
-export function runLightModeVerification(): void {
+export function runLightModeVerification(): VerificationResult[] {
   console.log('🌞 Light Mode Verification Tests\n');
   console.log('Running comprehensive light mode functionality tests...\n');
   
@@ -329,9 +329,6 @@ export function runLightModeVerification(): void {
 export function quickLightModeTest(): boolean {
   try {
     const root = document.documentElement;
-    
-    // Test theme switching
-    const initialTheme = root.classList.contains('light') ? 'light' : 'dark';
     
     // Switch to light mode
     root.classList.remove('dark');
