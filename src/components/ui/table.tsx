@@ -43,7 +43,10 @@ const TableFooter = React.forwardRef<
   <tfoot
     ref={ref}
     className={cn(
-      "border-t bg-neutral-100/50 dark:bg-background-surface font-medium [&>tr]:last:border-b-0",
+      // Light mode styles
+      "border-t bg-gray-50 font-medium [&>tr]:last:border-b-0",
+      // Dark mode styles
+      "dark:border-gray-700 dark:bg-gray-800",
       className
     )}
     {...props}
@@ -58,7 +61,12 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b border-neutral-200 dark:border-border transition-colors hover:bg-neutral-50 dark:hover:bg-background-elevated data-[state=selected]:bg-neutral-100 dark:data-[state=selected]:bg-highlight focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-inset",
+      // Light mode styles
+      "border-b border-gray-200 transition-colors hover:bg-gray-50",
+      "data-[state=selected]:bg-gray-100 focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-inset",
+      // Dark mode styles
+      "dark:border-gray-700 dark:hover:bg-gray-800",
+      "dark:data-[state=selected]:bg-gray-700 dark:focus-within:ring-blue-400",
       className
     )}
     {...props}
@@ -73,7 +81,10 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-neutral-500 dark:text-text-secondary [&:has([role=checkbox])]:pr-0",
+      // Light mode styles
+      "h-12 px-4 text-left align-middle font-medium text-gray-600 [&:has([role=checkbox])]:pr-0",
+      // Dark mode styles
+      "dark:text-gray-400",
       className
     )}
     {...props}
@@ -99,7 +110,13 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("mt-4 text-sm text-neutral-500", className)}
+    className={cn(
+      // Light mode styles
+      "mt-4 text-sm text-gray-600",
+      // Dark mode styles
+      "dark:text-gray-400",
+      className
+    )}
     {...props}
   />
 ))
