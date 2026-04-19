@@ -8,12 +8,12 @@ export function Header() {
   const { currentRole } = useRole();
 
   return (
-    <header className="h-16 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-6 flex items-center justify-between shadow-sm dark:shadow-none">
+    <header className="h-16 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
         <img 
           src={logo} 
           alt="CoFlex Logo" 
-          className="h-8 w-auto drop-shadow-sm"
+          className="h-8 w-auto"
         />
       </div>
 
@@ -29,7 +29,7 @@ export function Header() {
               {currentRole === 'TBW' ? 'Transaction Banking Wholesale' : 'Retail Deposit Product & Solution'}
             </p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center border border-primary-200 dark:border-primary-800">
+          <div className="h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center">
             <User className="h-5 w-5 text-primary-700 dark:text-primary-400" />
           </div>
         </div>

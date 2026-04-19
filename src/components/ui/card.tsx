@@ -9,12 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      // Light mode styles
-      "rounded-lg border border-gray-200 bg-white text-gray-900 shadow-sm transition-all duration-150",
-      "hover:shadow-lg hover:-translate-y-1 focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2",
-      // Dark mode styles
-      "dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100",
-      "dark:hover:bg-gray-750 dark:focus-within:ring-blue-400 dark:focus-within:ring-offset-gray-900",
+      "rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-sm transition-all duration-150 hover:shadow-lg hover:-translate-y-1 dark:hover:bg-neutral-800 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2",
       className
     )}
     {...props}
@@ -55,13 +50,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      // Light mode styles
-      "text-sm text-gray-600",
-      // Dark mode styles
-      "dark:text-gray-400", 
-      className
-    )}
+    className={cn("text-sm text-neutral-500 dark:text-neutral-400", className)}
     {...props}
   />
 ))
