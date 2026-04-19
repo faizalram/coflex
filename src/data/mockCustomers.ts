@@ -60,7 +60,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 94,
     projectedSavings: 40_250_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-18'),
     mlVariables: generateMLVariables('Corporate', 5_750_000_000_000),
   },
   {
@@ -73,7 +73,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 91,
     projectedSavings: 29_400_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-17'),
     mlVariables: generateMLVariables('Corporate', 4_200_000_000_000),
   },
   {
@@ -86,7 +86,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 88,
     projectedSavings: 30_400_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-15'),
     mlVariables: generateMLVariables('Corporate', 3_800_000_000_000),
   },
   {
@@ -99,7 +99,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 96,
     projectedSavings: 59_500_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-19'),
     mlVariables: generateMLVariables('Corporate', 8_500_000_000_000),
   },
   {
@@ -112,7 +112,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 93,
     projectedSavings: 41_400_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-18'),
     mlVariables: generateMLVariables('Corporate', 6_900_000_000_000),
   },
   // Commercial Segment
@@ -126,7 +126,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 85,
     projectedSavings: 14_700_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-10'),
     mlVariables: generateMLVariables('Commercial', 2_100_000_000_000),
   },
   {
@@ -139,7 +139,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 87,
     projectedSavings: 12_950_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-14'),
     mlVariables: generateMLVariables('Commercial', 1_850_000_000_000),
   },
   {
@@ -152,7 +152,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 90,
     projectedSavings: 11_200_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-16'),
     mlVariables: generateMLVariables('Commercial', 1_600_000_000_000),
   },
   {
@@ -165,7 +165,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 82,
     projectedSavings: 13_650_000_000,
-    lastUpdated: new Date('2025-11-06'),
+    lastUpdated: new Date('2026-04-07'),
     mlVariables: generateMLVariables('Commercial', 1_950_000_000_000),
   },
   {
@@ -178,7 +178,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 86,
     projectedSavings: 9_800_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-12'),
     mlVariables: generateMLVariables('Commercial', 1_400_000_000_000),
   },
   {
@@ -191,7 +191,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 78,
     projectedSavings: 7_840_000_000,
-    lastUpdated: new Date('2025-11-05'),
+    lastUpdated: new Date('2026-03-28'),
     mlVariables: generateMLVariables('Commercial', 980_000_000_000),
   },
   // GVI Segment
@@ -205,7 +205,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 92,
     projectedSavings: 8_750_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-17'),
     mlVariables: generateMLVariables('GVI', 1_250_000_000_000),
   },
   {
@@ -218,7 +218,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 90,
     projectedSavings: 7_700_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-18'),
     mlVariables: generateMLVariables('GVI', 1_100_000_000_000),
   },
   {
@@ -231,7 +231,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 88,
     projectedSavings: 6_650_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-11'),
     mlVariables: generateMLVariables('GVI', 950_000_000_000),
   },
   {
@@ -244,7 +244,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 87,
     projectedSavings: 9_450_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-13'),
     mlVariables: generateMLVariables('GVI', 1_350_000_000_000),
   },
   {
@@ -257,7 +257,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Low',
     confidenceScore: 89,
     projectedSavings: 6_160_000_000,
-    lastUpdated: new Date('2025-11-08'),
+    lastUpdated: new Date('2026-04-19'),
     mlVariables: generateMLVariables('GVI', 880_000_000_000),
   },
   // SME Segment
@@ -271,7 +271,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 80,
     projectedSavings: 3_150_000_000,
-    lastUpdated: new Date('2025-11-06'),
+    lastUpdated: new Date('2026-04-05'),
     mlVariables: generateMLVariables('SME', 450_000_000_000),
   },
   {
@@ -284,7 +284,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 77,
     projectedSavings: 2_660_000_000,
-    lastUpdated: new Date('2025-11-05'),
+    lastUpdated: new Date('2026-03-22'),
     mlVariables: generateMLVariables('SME', 380_000_000_000),
   },
   {
@@ -297,7 +297,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 83,
     projectedSavings: 3_640_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-09'),
     mlVariables: generateMLVariables('SME', 520_000_000_000),
   },
   {
@@ -310,7 +310,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 79,
     projectedSavings: 2_870_000_000,
-    lastUpdated: new Date('2025-11-06'),
+    lastUpdated: new Date('2026-04-03'),
     mlVariables: generateMLVariables('SME', 410_000_000_000),
   },
   {
@@ -323,7 +323,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 81,
     projectedSavings: 2_450_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-08'),
     mlVariables: generateMLVariables('SME', 350_000_000_000),
   },
   {
@@ -336,7 +336,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 84,
     projectedSavings: 3_360_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-11'),
     mlVariables: generateMLVariables('SME', 480_000_000_000),
   },
   {
@@ -349,7 +349,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 76,
     projectedSavings: 2_730_000_000,
-    lastUpdated: new Date('2025-11-05'),
+    lastUpdated: new Date('2026-03-19'),
     mlVariables: generateMLVariables('SME', 390_000_000_000),
   },
   {
@@ -362,7 +362,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 82,
     projectedSavings: 3_080_000_000,
-    lastUpdated: new Date('2025-11-06'),
+    lastUpdated: new Date('2026-04-04'),
     mlVariables: generateMLVariables('SME', 440_000_000_000),
   },
   {
@@ -375,7 +375,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 78,
     projectedSavings: 2_520_000_000,
-    lastUpdated: new Date('2025-11-05'),
+    lastUpdated: new Date('2026-03-25'),
     mlVariables: generateMLVariables('SME', 360_000_000_000),
   },
   {
@@ -388,7 +388,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 85,
     projectedSavings: 3_500_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-13'),
     mlVariables: generateMLVariables('SME', 500_000_000_000),
   },
   {
@@ -401,7 +401,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 80,
     projectedSavings: 2_940_000_000,
-    lastUpdated: new Date('2025-11-06'),
+    lastUpdated: new Date('2026-04-06'),
     mlVariables: generateMLVariables('SME', 420_000_000_000),
   },
   {
@@ -414,7 +414,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 83,
     projectedSavings: 3_290_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-15'),
     mlVariables: generateMLVariables('SME', 470_000_000_000),
   },
   {
@@ -427,7 +427,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'High',
     confidenceScore: 81,
     projectedSavings: 2_800_000_000,
-    lastUpdated: new Date('2025-11-06'),
+    lastUpdated: new Date('2026-04-02'),
     mlVariables: generateMLVariables('SME', 400_000_000_000),
   },
   {
@@ -440,7 +440,7 @@ export const mockWholesaleCustomers: WholesaleCustomer[] = [
     sensitivity: 'Medium',
     confidenceScore: 82,
     projectedSavings: 3_010_000_000,
-    lastUpdated: new Date('2025-11-07'),
+    lastUpdated: new Date('2026-04-16'),
     mlVariables: generateMLVariables('SME', 430_000_000_000),
   },
 ];
