@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
+    <ThemeProvider defaultTheme="dark">
       <App />
     </ThemeProvider>
   </StrictMode>,

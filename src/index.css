@@ -35,7 +35,8 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .dark body {
+  .dark body,
+  body:has(html.dark) {
     background-color: #0D0D0D;
     color: #E6E6E6;
   }

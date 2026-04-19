@@ -13,7 +13,7 @@ function App() {
   return (
     <ErrorBoundary>
       <RoleProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/coflex/">
           <AppLayout>
             <PageTransition>
               <Routes>
